@@ -1,14 +1,18 @@
 const express = require("express");
 const router = express.Router();
 
+const postList = require("../data/posts.js");
+
 //index
 router.get("/", (req, res) => {
-    res.send("Lista dei posts");
+    //res.send(`Lista dei post`);
+    res.send(postList);
 })
 
 //show
-router.get("/:id", (req, res) => {
-    res.send(`Post: ${req.params.id}`);
+router.get("/:slug", (req, res) => {
+    //res.send(`Post: ${req.params.id}`);
+    res.send(postList.find((post) => post.slug === req.params.slug));
 })
 
 //store
@@ -17,18 +21,18 @@ router.post("/", (req, res) => {
 })
 
 //update
-router.put("/:id", (req, res) => {
-    res.send(`Modifica totale del post: ${req.params.id}`);
+router.put("/:slug", (req, res) => {
+    res.send(`Modifica totale del post: ${req.params.slug}`);
 })
 
 //modify
-router.patch("/:id", (req, res) => {
-    res.send(`Modifica parziale del post: ${req.params.id}`);
+router.patch("/:slug", (req, res) => {
+    res.send(`Modifica parziale del post: ${req.params.slug}`);
 })
 
 //delete
-router.delete("/:id", (req, res) => {
-    res.send(`Cancellazione del post ${req.params.id}`);
+router.delete("/:slug", (req, res) => {
+    res.send(`Cancellazione del post ${req.params.slug}`);
 })
 
 module.exports = router;
